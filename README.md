@@ -190,3 +190,4 @@ Este proyecto es de código abierto. Puedes usarlo, modificarlo y distribuirlo l
 ---
 
 **¡Disfruta gestionando tus proyectos con TrelOpptech! 🚀**
+

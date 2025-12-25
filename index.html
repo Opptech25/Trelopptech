@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrelOpptech - Gestión de Proyectos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #141937;
+            --bg-card: #1e2545;
+            --text-primary: #e8eaf6;
+            --text-secondary: #a5b4fc;
+            --accent-primary: #6366f1;
+            --accent-hover: #818cf8;
+            --opptech-green: #1e7b6d;
+            --opptech-green-light: #2a9d8f;
+            --opptech-black: #1a1a1a;
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        .landing-container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .opptech-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .opptech-badge img {
+            height: 30px;
+            width: auto;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .opptech-badge:hover img {
+            opacity: 1;
+        }
+
+        .opptech-by {
+            font-size: 11px;
+            color: var(--opptech-green-light);
+            font-weight: 500;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .auth-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid var(--accent-primary);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .tab:hover {
+            transform: translateY(-2px);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--opptech-green-light));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--accent-hover), var(--opptech-green));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .generated-credentials {
+            margin-top: 20px;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-primary);
+        }
+
+        .credential-item {
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+        .credential-label {
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+
+        .credential-value {
+            font-weight: 600;
+            color: var(--accent-primary);
+            font-size: 16px;
+            user-select: all;
+        }
+
+        .info-message {
+            padding: 12px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 11px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .feature-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 36px;
+            }
+
+            .tagline {
+                font-size: 16px;
+            }
+
+            .auth-container {
+                padding: 30px 20px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-container">
+        <div class="hero-section">
+            <div class="logo">TrelOpptech</div>
+            <div class="opptech-badge">
+                <span class="opptech-by">By</span>
+                <img src="logo-opptech.png" alt="Opptech">
+            </div>
+            <div class="tagline">Sistema profesional de gestión de proyectos en la nube</div>
+        </div>
+
+        <div class="auth-container">
+            <div class="auth-tabs">
+                <button class="tab active" onclick="switchTab('login')">Iniciar Sesión</button>
+                <button class="tab" onclick="switchTab('register')">Registrarse</button>
+            </div>
+
+            <!-- Login Form -->
+            <form class="auth-form active" id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label">NIT</label>
+                    <input type="text" class="form-input" id="loginNit" placeholder="Ingresa tu NIT" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Clave</label>
+                    <input type="password" class="form-input" id="loginPassword" placeholder="Ingresa tu clave" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Ingresar</button>
+
+                <div class="info-message">
+                    💡 Tus datos se almacenan localmente en tu navegador
+                </div>
+            </form>
+
+            <!-- Register Form -->
+            <form class="auth-form" id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label class="form-label">Nombre de la empresa</label>
+                    <input type="text" class="form-input" id="companyName" placeholder="Nombre de tu empresa" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">NIT</label>
+                    <input type="text" class="form-input" id="registerNit" placeholder="NIT de tu empresa" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" id="registerEmail" placeholder="correo@empresa.com" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Crear Cuenta</button>
+
+                <div id="credentialsDisplay"></div>
+            </form>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">Dashboard Inteligente</div>
+                <div class="feature-desc">Visualiza el progreso de todos tus proyectos con estadísticas en tiempo real</div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-title">Gestión de Tareas</div>
+                <div class="feature-desc">Organiza tareas con drag & drop, prioridades y fechas de vencimiento</div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📁</div>
+                <div class="feature-title">Subproyectos</div>
+                <div class="feature-desc">Crea jerarquías de proyectos con tableros independientes</div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🚦</div>
+                <div class="feature-title">Sistema Semáforo</div>
+                <div class="feature-desc">Monitoreo automático del estado de cada proyecto</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            const tabs = document.querySelectorAll('.tab');
+            const forms = document.querySelectorAll('.auth-form');
+            
+            tabs.forEach(t => t.classList.remove('active'));
+            forms.forEach(f => f.classList.remove('active'));
+            
+            if (tab === 'login') {
+                tabs[0].classList.add('active');
+                document.getElementById('loginForm').classList.add('active');
+            } else {
+                tabs[1].classList.add('active');
+                document.getElementById('registerForm').classList.add('active');
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const nit = document.getElementById('loginNit').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            
+            const users = JSON.parse(localStorage.getItem('trelopptech-users')) || [];
+            const user = users.find(u => u.nit === nit && u.password === password);
+            
+            if (user) {
+                sessionStorage.setItem('trelopptech-current-user', JSON.stringify(user));
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('NIT o clave incorrectos. Por favor verifica tus credenciales.');
+            }
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            
+            const companyName = document.getElementById('companyName').value.trim();
+            const nit = document.getElementById('registerNit').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
+            
+            const users = JSON.parse(localStorage.getItem('trelopptech-users')) || [];
+            
+            if (users.find(u => u.nit === nit)) {
+                alert('Este NIT ya está registrado. Por favor inicia sesión.');
+                return;
+            }
+            
+            const password = generatePassword();
+            
+            const newUser = {
+                id: Date.now(),
+                companyName,
+                nit,
+                email,
+                password,
+                createdAt: new Date().toISOString()
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('trelopptech-users', JSON.stringify(users));
+            
+            const credentialsHTML = `
+                <div class="generated-credentials">
+                    <div style="font-weight: 600; margin-bottom: 15px; color: var(--accent-primary);">
+                        ✅ Cuenta creada exitosamente
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-label">NIT:</div>
+                        <div class="credential-value">${nit}</div>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-label">Clave generada:</div>
+                        <div class="credential-value">${password}</div>
+                    </div>
+                    <div style="margin-top: 15px; font-size: 11px; color: var(--text-secondary);">
+                        ⚠️ Guarda esta clave en un lugar seguro. La necesitarás para iniciar sesión.
+                    </div>
+                    <button class="btn btn-primary" onclick="goToLogin()" style="margin-top: 20px;">
+                        Ir a Iniciar Sesión
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('credentialsDisplay').innerHTML = credentialsHTML;
+            document.getElementById('registerForm').querySelector('.btn-primary').style.display = 'none';
+        }
+
+        function generatePassword() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+            let password = '';
+            for (let i = 0; i < 12; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return password;
+        }
+
+        function goToLogin() {
+            document.getElementById('registerForm').reset();
+            document.getElementById('credentialsDisplay').innerHTML = '';
+            document.getElementById('registerForm').querySelector('.btn-primary').style.display = 'block';
+            switchTab('login');
+        }
+
+        // Auto-login si ya hay sesión
+        window.addEventListener('DOMContentLoaded', () => {
+            const currentUser = sessionStorage.getItem('trelopptech-current-user');
+            if (currentUser) {
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>

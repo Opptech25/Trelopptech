@@ -1,0 +1,120 @@
+/* 
+ * TrelOpptech - Estilos corporativos
+ * Integración de marca Opptech
+ */
+
+/* Colores corporativos Opptech */
+:root {
+    --opptech-green: #1e7b6d;
+    --opptech-green-light: #2a9d8f;
+    --opptech-green-dark: #15594f;
+    --opptech-black: #1a1a1a;
+    --opptech-gray: #333333;
+}
+
+/* Gradientes con identidad Opptech */
+.opptech-gradient {
+    background: linear-gradient(135deg, var(--accent-primary), var(--opptech-green-light));
+}
+
+.opptech-gradient-hover:hover {
+    background: linear-gradient(135deg, var(--accent-hover), var(--opptech-green));
+}
+
+/* Bordes con acento Opptech */
+.opptech-border {
+    border-image: linear-gradient(to bottom, var(--accent-primary), var(--opptech-green-light)) 1;
+}
+
+/* Badges y elementos de marca */
+.opptech-powered {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    color: var(--opptech-green-light);
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.opptech-powered:hover {
+    opacity: 1;
+}
+
+/* Footer con marca Opptech (opcional) */
+.opptech-footer {
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(26, 26, 26, 0.6);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.opptech-footer img {
+    height: 20px;
+    width: auto;
+    opacity: 0.7;
+}
+
+.opptech-footer span {
+    font-size: 9px;
+    color: var(--opptech-green-light);
+    font-weight: 500;
+}
+
+/* Animaciones con acento Opptech */
+@keyframes opptechPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(42, 157, 143, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(42, 157, 143, 0);
+    }
+}
+
+.opptech-pulse {
+    animation: opptechPulse 2s infinite;
+}
+
+/* Estados de éxito con verde Opptech */
+.success-opptech {
+    background: var(--opptech-green);
+    color: white;
+}
+
+.success-opptech-light {
+    background: rgba(42, 157, 143, 0.1);
+    color: var(--opptech-green-light);
+    border: 1px solid var(--opptech-green-light);
+}
+
+/* Elementos interactivos con hover Opptech */
+.interactive-opptech {
+    transition: all 0.3s ease;
+}
+
+.interactive-opptech:hover {
+    border-color: var(--opptech-green-light);
+    box-shadow: 0 0 20px rgba(42, 157, 143, 0.2);
+}
+
+/* Indicadores de progreso con gradiente Opptech */
+.progress-opptech {
+    background: linear-gradient(90deg, var(--accent-primary), var(--opptech-green-light));
+}
+
+/* Responsive - ocultar elementos Opptech en móvil */
+@media (max-width: 768px) {
+    .opptech-footer {
+        display: none;
+    }
+    
+    .opptech-logo-mobile-hide {
+        display: none;
+    }
+}
